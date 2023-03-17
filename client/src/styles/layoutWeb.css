@@ -1,4 +1,4 @@
-/* //navbar css */
+/* navbar css */
 .navbar {
       font-family: "Poppins", sans-serif;
       font-size: 17px;
@@ -23,8 +23,7 @@
       letter-spacing: 3px;
 }
 
-/* =============================
-==========footer============= */
+/* =======================================footer============= */
 
 .footer {
       color: white;
@@ -49,8 +48,7 @@
       border-bottom: 1px solid #ffefba;
 }
 
-/* =================================
-======== page not found css ======= */
+/* ========================================= page not found css ======= */
 .pnf {
       display: flex;
       min-height: 65vh;
@@ -81,8 +79,7 @@
       color: white;
 }
 
-/* ========================================= */
-/* =========contact us ========= */
+/* ==================================================contact us ========= */
 .contactus {
       margin: 0;
       padding: 0;
@@ -91,8 +88,8 @@
       align-items: center;
       justify-content: center;
 }
-/* ===================================
-========= register page  */
+
+/* ============================================ register page  */
 .form-container {
       display: flex;
       align-items: center;
