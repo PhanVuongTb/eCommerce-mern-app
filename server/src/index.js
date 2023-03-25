@@ -8,6 +8,7 @@ import morgan from "morgan";
 import connectDB from "./config/db.js";
 
 import authRouter from "./routes/authRoute.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 //configure env
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(morgan("dev"));
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+app.use("/api", categoryRoutes);
 app.use("/api", authRouter);
 
 //Post

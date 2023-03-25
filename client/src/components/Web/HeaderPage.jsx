@@ -69,6 +69,7 @@ const HeaderPage = () => {
                       <NavLink
                         to={`/${auth?.user?.role === 1 ? "admin" : "user"}`}
                         className="dropdown-item"
+                        style={{ color: "white" }}
                       >
                         Admin
                       </NavLink>
@@ -78,6 +79,7 @@ const HeaderPage = () => {
                         onClick={handleLogout}
                         to="/login"
                         className="dropdown-item"
+                        style={{ color: "white" }}
                       >
                         Logout
                       </NavLink>

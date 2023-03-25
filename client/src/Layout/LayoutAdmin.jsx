@@ -1,10 +1,8 @@
 import React from "react";
-import { Link, Outlet, NavLink } from "react-router-dom";
-import { Button, Image } from "react-bootstrap";
+import { Link, Outlet } from "react-router-dom";
+import { Image } from "react-bootstrap";
 import image1 from "../assets/imgs/customer01.jpg";
 import "../styles/layoutAdmin.css";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Dropdown from "react-bootstrap/Dropdown";
 import toast from "react-hot-toast";
 import { useAuth } from "../context/auth";
 
@@ -26,9 +24,9 @@ const LayoutAdmin = () => {
           <li>
             <Link href="#">
               <span className="icon">
-                <ion-icon name="logo-apple" />
+                {/* <ion-icon name="logo-apple" /> */}
               </span>
-              <span className="title">Brand Name</span>
+              <span className="title">Ecommerce</span>
             </Link>
           </li>
           <li>
@@ -36,7 +34,9 @@ const LayoutAdmin = () => {
               <span className="icon">
                 <ion-icon name="home-outline" />
               </span>
-              <span className="title">Dashboard</span>
+              <Link to="/admin" className="title">
+                Dashboard
+              </Link>
             </Link>
           </li>
           <li>
@@ -44,27 +44,27 @@ const LayoutAdmin = () => {
               <span className="icon">
                 <ion-icon name="people-outline" />
               </span>
-              <span className="title">Customers</span>
+              <span className="title">User</span>
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link to="/admin/category">
               <span className="icon">
-                <ion-icon name="chatbubble-outline" />
+                {/* <ion-icon name="chatbubble-outline" /> */}
               </span>
-              <span className="title">Messages</span>
+              <span className="title">Category</span>
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link to="/admin/products">
               <span className="icon">
-                <ion-icon name="help-outline" />
+                {/* <ion-icon name="help-outline" /> */}
               </span>
-              <span className="title">Help</span>
+              <span className="title">Products</span>
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link to="#">
               <span className="icon">
                 <ion-icon name="settings-outline" />
               </span>
@@ -72,7 +72,7 @@ const LayoutAdmin = () => {
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link to="#">
               <span className="icon">
                 <ion-icon name="lock-closed-outline" />
               </span>
@@ -80,11 +80,19 @@ const LayoutAdmin = () => {
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link onClick={handleLogout} to="/login">
               <span className="icon">
                 <ion-icon name="log-out-outline" />
               </span>
               <span className="title">Sign Out</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/">
+              <span className="icon">
+                <ion-icon name="arrow-back-circle-outline" />
+              </span>
+              <span className="title">Quay lại Web</span>
             </Link>
           </li>
         </ul>
@@ -109,31 +117,6 @@ const LayoutAdmin = () => {
             <div className="user">
               <Image src={image1} />
             </div>
-            <Dropdown as={ButtonGroup}>
-              <Button variant="success">{auth?.user?.name}</Button>
-              <Dropdown.Toggle
-                split
-                variant="success"
-                id="dropdown-split-basic"
-              />
-              <Dropdown.Menu>
-                <Dropdown.Item>Action</Dropdown.Item>
-                <Dropdown.Item>
-                  <NavLink to="/" className="dropdown-item">
-                    Quay lại web
-                  </NavLink>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <NavLink
-                    onClick={handleLogout}
-                    to="/login"
-                    className="dropdown-item"
-                  >
-                    Logout
-                  </NavLink>
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
           </div>
         </div>
         <Outlet />
