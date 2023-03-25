@@ -9,6 +9,7 @@ import connectDB from "./config/db.js";
 
 import authRouter from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
 
 //configure env
 dotenv.config();
@@ -30,6 +31,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api", categoryRoutes);
 app.use("/api", authRouter);
+app.use("/api", productRoutes);
 
 //Post
 const PORT = process.env.PORT || 8080;
