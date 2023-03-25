@@ -1,28 +1,25 @@
 import React from "react";
-// import FooterPage from "../components/Admin/FooterPage";
-// import HeaderPage from "../components/Admin/HeaderPage";
-import { Link, Outlet } from "react-router-dom";
-import { Image } from "react-bootstrap";
+import { Link, Outlet, NavLink } from "react-router-dom";
+import { Button, Image } from "react-bootstrap";
 import image1 from "../assets/imgs/customer01.jpg";
 import "../styles/layoutAdmin.css";
-// import Navbar from "../components/Admin/Navbar";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Dropdown from "react-bootstrap/Dropdown";
+import toast from "react-hot-toast";
+import { useAuth } from "../context/auth";
 
 const LayoutAdmin = () => {
+  const [auth, setAuth] = useAuth();
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+    localStorage.removeItem("auth");
+    toast.success("Logout Successfully");
+  };
   return (
-    // <div className="container-fluid">
-    //   <div>
-    //     <Navbar />
-    //   </div>
-    //   <main className="main">
-    //     <header>
-    //       <HeaderPage />
-    //     </header>
-    //     <Outlet />
-    //   </main>
-    //   <footer>
-    //     <FooterPage />
-    //   </footer>
-    // </div>
     <div className="container-fluid">
       <div className="navigation">
         <ul>
@@ -104,56 +101,39 @@ const LayoutAdmin = () => {
               <ion-icon name="search-outline" />
             </label>
           </div>
-          <div className="user">
-            <Image src={image1} />
-          </div>
-
-          <div className="nav-item dropdown no-arrow">
-            <Link
-              className="nav-link dropdown-toggle"
-              href="#"
-              id="userDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-                Douglas McGee
-              </span>
-              <Image
-                className="img-profile rounded-circle"
-                src="img/undraw_profile.svg"
-              />
-            </Link>
-            {/*  <!-- Dropdown - User Information --> */}
-            <div
-              className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-              aria-labelledby="userDropdown"
-            >
-              <Link className="dropdown-item" href="#">
-                <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Profile
-              </Link>
-              <Link className="dropdown-item" href="#">
-                <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                Settings
-              </Link>
-              <Link className="dropdown-item" href="#">
-                <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                Activity Log
-              </Link>
-              <div className="dropdown-divider"></div>
-              <Link
-                className="dropdown-item"
-                href="#"
-                data-toggle="modal"
-                data-target="#logoutModal"
-              >
-                <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Logout
-              </Link>
+          <div
+            style={{
+              display: "flex",
+            }}
+          >
+            <div className="user">
+              <Image src={image1} />
             </div>
+            <Dropdown as={ButtonGroup}>
+              <Button variant="success">{auth?.user?.name}</Button>
+              <Dropdown.Toggle
+                split
+                variant="success"
+                id="dropdown-split-basic"
+              />
+              <Dropdown.Menu>
+                <Dropdown.Item>Action</Dropdown.Item>
+                <Dropdown.Item>
+                  <NavLink to="/" className="dropdown-item">
+                    Quay lại web
+                  </NavLink>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <NavLink
+                    onClick={handleLogout}
+                    to="/login"
+                    className="dropdown-item"
+                  >
+                    Logout
+                  </NavLink>
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
         </div>
         <Outlet />

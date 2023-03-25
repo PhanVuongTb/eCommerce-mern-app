@@ -1,4 +1,5 @@
 import React from "react";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import toast from "react-hot-toast";
@@ -14,7 +15,6 @@ const HeaderPage = () => {
     localStorage.removeItem("auth");
     toast.success("Logout Successfully");
   };
-
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -60,15 +60,61 @@ const HeaderPage = () => {
                 </>
               ) : (
                 <>
-                  <li className="nav-item">
+                  <NavDropdown
+                    id="nav-dropdown-dark-example"
+                    title={auth?.user?.name}
+                    menuVariant="dark"
+                  >
+                    <NavDropdown.Item>
+                      <NavLink
+                        to={`/${auth?.user?.role === 1 ? "admin" : "user"}`}
+                        className="dropdown-item"
+                      >
+                        Admin
+                      </NavLink>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item>
+                      <NavLink
+                        onClick={handleLogout}
+                        to="/login"
+                        className="dropdown-item"
+                      >
+                        Logout
+                      </NavLink>
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                  {/* <li className="nav-item dropdown">
                     <NavLink
-                      onClick={handleLogout}
-                      to="/login"
-                      className="nav-link"
+                      className="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
                     >
-                      Logout
+                      {auth?.user?.name}
                     </NavLink>
-                  </li>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <NavLink
+                          to={`/admin/${
+                            auth?.user?.role === 1 ? "admin" : "user"
+                          }`}
+                          className="dropdown-item"
+                        >
+                          Dashboard
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          onClick={handleLogout}
+                          to="/login"
+                          className="dropdown-item"
+                        >
+                          Logout
+                        </NavLink>
+                      </li>
+                    </ul>
+                  </li> */}
                 </>
               )}
               <li className="nav-item">
